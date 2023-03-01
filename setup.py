@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'race_state_relay'
+package_name = 'Race-Control-System-Client'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "RS_relay = race_state_relay.RS_relay:main"
+            "RCS_client = RCS_client.RCS_client:main"
         ],
     },
 )
