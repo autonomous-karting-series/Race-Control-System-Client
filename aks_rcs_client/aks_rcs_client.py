@@ -4,9 +4,9 @@ import paho.mqtt.client as mqtt
 from rclpy.node import Node
 from std_msgs.msg import String
 
-class RCS_client(Node):
+class aks_rcs_client(Node):
     def __init__(self):
-        super().__init__("RCS_client")
+        super().__init__("aks_rcs_client")
 
         self.declare_parameters(
             namespace='',
@@ -59,7 +59,7 @@ def main(args=None):
     rclpy.init(args=args)
 
     try:
-        node = RCS_client()
+        node = aks_rcs_client()
         rclpy.spin(node)
     except rclpy.exceptions.ROSInterruptException:
         pass

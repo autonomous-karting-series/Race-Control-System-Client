@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>race_state_relay</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="berliernj@todo.todo">berliernj</maintainer>
-  <license>TODO: License declaration</license>
+  <name>aks_rcs_client</name>
+  <version>0.0.1</version>
+  <description>ROS2-MQTT bridge for track and kart state communication</description>
+  <maintainer email="berlier3@gmail.com">Nick Berlier</maintainer>
+  <license>GNU General Public License 3.0</license>
 
   <depend>rclpy</depend>
 
