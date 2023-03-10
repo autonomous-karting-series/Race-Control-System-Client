@@ -1,3 +1,5 @@
+"""aks_rcs_client is the ROS2-MQTT bridge for track and kart state communication."""
+
 from setuptools import setup
 
 package_name = 'aks_rcs_client'

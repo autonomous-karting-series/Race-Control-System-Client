@@ -1,3 +1,5 @@
+"""Contains main runner for aks_rcs_client."""
+
 #usr/bin/env python3
 import aks_rcs_client
 import rclpy
@@ -7,8 +9,10 @@ from std_msgs.msg import String
 
 
 class AKSRCSClient(Node):
+    """Class handling the ASK Client node process."""
 
     def __init__(self):
+        """Initialize AKSRCSClient class."""
         super().__init__('aks_rcs_client')
         self.declare_parameters(
             namespace='',
@@ -62,19 +66,14 @@ class AKSRCSClient(Node):
         self.mqttclient.subscribe(mqtt_track_topic)
 
     def listener_callback(self, msg):
-        """ROS2 kart_topic message publish to mqtt kart_topic
-        """
+        """ROS2 kart_topic message publish to mqtt kart_topic."""
         self.get_logger().info(msg.data)
         self.mqttclient.publish(self.mqtt_kart_topic, str(msg.data))
 
 
-def main(args=None):
+if __name__ == '__main__':
     rclpy.init(args=args)
     aks_rcs_client = AKSRCSClient()
     rclpy.spin(aks_rcs_client)
     aks_rcs_client.destroy_node()
     rclpy.shutdown()
-
-
-if __name__ == '__main__':
-    main()
