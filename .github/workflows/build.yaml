@@ -1,8 +1,11 @@
+name: build
 on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:focal
     steps:
       - uses: ros-tooling/setup-ros@v0.6
         with:

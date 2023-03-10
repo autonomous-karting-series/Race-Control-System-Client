@@ -1,15 +1,15 @@
 #usr/bin/env python3
+import aks_rcs_client
 import rclpy
 import paho.mqtt.client as mqtt
 from rclpy.node import Node
 from std_msgs.msg import String
 
 
-class RCSClient(Node):
+class AKSRCSClient(Node):
 
     def __init__(self):
-        super().__init__('RCSclient')
-
+        super().__init__('aks_rcs_client')
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -76,14 +76,9 @@ class RCSClient(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
-    try:
-        node = RCSClient()
-        rclpy.spin(node)
-    except rclpy.exceptions.ROSInterruptException:
-        pass
-
-    node.destroy_node()
+    aks_rcs_client = AKSRCSClient()
+    rclpy.spin(aks_rcs_client)
+    aks_rcs_client.destroy_node()
     rclpy.shutdown()
 
 
