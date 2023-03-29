@@ -16,17 +16,17 @@ class AKSRCSClient(Node):
         super().__init__('aks_rcs_client')
         self.declare_parameters(
             namespace='',
-            parameters=[# Team ID, unique identifier for each team
+            parameters=[ #Team ID, unique identifier for each team
             		 ('team_id', 'TEAM_ID'), 
-            		 # Address of mqtt broker			
+            		 #Address of mqtt broker			
                         ('mqtt_host', '127.0.0.1'),   
-                        # Port of mqtt broker
-                        ('mqtt_port', 1883),				
+                        #Port of mqtt broker
+                        ('mqtt_port', 1883),			
                         ('mqtt_track_state_topic', 'track_state'),
                         ('mqtt_kart_state_topic', 'kart_state'),
-                        # ROS topic to publish track state to	
+                        #ROS topic to publish track state to	
                         ('ros_track_state_topic', 'track_state'),
-                        # ROS topic to subscribe to for kart state
+                        #ROS topic to subscribe to for kart state
                         ('ros_kart_state_topic', 'kart_state' )])	
 
         # Get params
