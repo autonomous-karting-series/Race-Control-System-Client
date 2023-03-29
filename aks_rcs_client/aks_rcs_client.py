@@ -16,16 +16,13 @@ class AKSRCSClient(Node):
         super().__init__('aks_rcs_client')
         self.declare_parameters(
             namespace='',
-            parameters=[('team_id', 'TEAM_ID',
-                         'Team ID, unique identifier for each team'),
-                        ('mqtt_host', '127.0.0.1', 'Address of mqtt broker'),
-                        ('mqtt_port', 1883, 'Port of mqtt broker'),
+            parameters=[('team_id', 'TEAM_ID'), 			# Team ID, unique identifier for each team
+                        ('mqtt_host', '127.0.0.1'),    		# Address of mqtt broker
+                        ('mqtt_port', 1883),				# Port of mqtt broker
                         ('mqtt_track_state_topic', 'track_state'),
-                        ('mqtt_kart_state_topic', 'kart_state'),
-                        ('ros_track_state_topic', 'track_state',
-                         'ROS topic to publish track state to'),
-                        ('ros_kart_state_topic', 'kart_state',
-                         'ROS topic to subscribe to for kart state')])
+                        ('mqtt_kart_state_topic', 'kart_state'),		
+                        ('ros_track_state_topic', 'track_state'),	# ROS topic to publish track state to		    
+                        ('ros_kart_state_topic', 'kart_state' )])	# ROS topic to subscribe to for kart state
 
         # Get params
         team_id = self.get_parameter('team_id').value
@@ -69,11 +66,14 @@ class AKSRCSClient(Node):
         """ROS2 kart_topic message publish to mqtt kart_topic."""
         self.get_logger().info(msg.data)
         self.mqttclient.publish(self.mqtt_kart_topic, str(msg.data))
-
-
-if __name__ == '__main__':
+        
+def main(args=None):
     rclpy.init(args=args)
     aks_rcs_client = AKSRCSClient()
     rclpy.spin(aks_rcs_client)
     aks_rcs_client.destroy_node()
     rclpy.shutdown()
+	
+
+if __name__ == '__main__':
+    main()
