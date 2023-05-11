@@ -1,6 +1,5 @@
 """Contains main runner for aks_rcs_client."""
 
-#usr/bin/env python3
 import aks_rcs_client
 import rclpy
 import paho.mqtt.client as mqtt
@@ -53,7 +52,6 @@ class AKSRCSClient(Node):
         def on_message(client, userdata, message):
             msg = String()
             msg.data = str(message.payload.decode('utf-8'))
-            self.get_logger().info(msg.data)
             self.race_state_pub.publish(msg)
 
         def on_disconnect(client, userdata, rc):
@@ -70,7 +68,6 @@ class AKSRCSClient(Node):
 
     def listener_callback(self, msg):
         """ROS2 kart_topic message publish to mqtt kart_topic."""
-        self.get_logger().info(msg.data)
         self.mqttclient.publish(self.mqtt_kart_topic, str(msg.data))
 
 
