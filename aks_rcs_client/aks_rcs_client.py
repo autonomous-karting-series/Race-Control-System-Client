@@ -6,6 +6,15 @@ import paho.mqtt.client as mqtt
 from rclpy.node import Node
 from std_msgs.msg import String
 
+# Create high-reliability QoS with guranteed delivery
+from rclpy.qos import QoSProfile, HistoryPolicy, DurabilityPolicy, ReliabilityPolicy
+qos_reliable = QoSProfile(
+    history=HistoryPolicy.KEEP_LAST, # TRANSIENT_LOCAL set, not point in history
+    depth=1, # See above
+    reliability=ReliabilityPolicy.RELIABLE,  # Guaranteed delivery
+    durability=DurabilityPolicy.
+    TRANSIENT_LOCAL  # Re-send msg to late-joining subscribers
+)
 
 class AKSRCSClient(Node):
     """Class handling the ASK Client node process."""
@@ -43,10 +52,10 @@ class AKSRCSClient(Node):
 
         # Initialize ros2 publisher and subscriber
         self.race_state_pub = self.create_publisher(String, ros_track_topic,
-                                                    10)
+                                                    qos_reliable)
         self.race_kart_sub = self.create_subscription(String, ros_kart_topic,
                                                       self.listener_callback,
-                                                      10)
+                                                      qos_reliable)
 
         # MQTT functions for async actions
         def on_message(client, userdata, message):
