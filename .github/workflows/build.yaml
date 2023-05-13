@@ -1,0 +1,21 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:focal
+    steps:
+      - uses: ros-tooling/setup-ros@v0.6
+        with:
+          required-ros-distributions: foxy
+      - uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          package-name: aks_rcs_client
+          target-ros2-distro: foxy
